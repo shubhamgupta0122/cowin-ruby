@@ -70,11 +70,12 @@ begin
   end
 
   response = Faraday.get(URL, params)
+  data = JSON.parse(response.body)
+
   logfile = File.open(LOGPATH, 'a')
-  logfile.write(response.body)
+  logfile.write(JSON.pretty_generate(JSON.parse(response.body)))
   logfile.close
 
-  data = JSON.parse(response.body)
   filtered_data = FilterCenters.call(data['centers'])
   friendly_sessions = filtered_data.map(&FriendlySessions).flatten
 
