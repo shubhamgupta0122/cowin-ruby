@@ -1,0 +1,4 @@
+logs/*
+.byebug_history
+pbtoken
+*.pem
